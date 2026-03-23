@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "998386189564",
+    "project_id": "growtogether-16693",
+    "storage_bucket": "growtogether-16693.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:998386189564:android:1a0c58c0391a27d3770379",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOort5jhL9GPjH6-HDcnL8a8pjq9bKN84"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
