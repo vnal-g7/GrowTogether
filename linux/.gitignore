@@ -1,1 +1,18 @@
-flutter/ephemeral
+# Flutter
+build/
+.dart_tool/
+.packages
+.pub/
+pubspec.lock
+
+# Android
+android/.gradle/
+android/app/build/
+
+# iOS
+ios/Pods/
+
+# Misc
+*.log
+*.tmp
+.DS_Store
