@@ -35,11 +35,20 @@ class _LoginScreenState extends State<LoginScreen> {
     }
 
     setState(() => _isLoading = true);
+
     try {
       await _authService.signIn(email: email, password: password);
+
+      if (!mounted) return;
+
+      AppUtils.showSnack(context, 'Login successful');
+      Navigator.pushReplacementNamed(context, '/dashboard');
     } on FirebaseAuthException catch (e) {
       if (!mounted) return;
       AppUtils.showSnack(context, e.message ?? 'Login failed', isError: true);
+    } catch (e) {
+      if (!mounted) return;
+      AppUtils.showSnack(context, 'Something went wrong: $e', isError: true);
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }
@@ -73,18 +82,27 @@ class _LoginScreenState extends State<LoginScreen> {
               constraints: const BoxConstraints(maxWidth: 420),
               child: Card(
                 elevation: 8,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24),
+                ),
                 child: Padding(
                   padding: const EdgeInsets.all(24),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      const Icon(Icons.school_rounded, size: 70, color: Color(0xFF3D5AFE)),
+                      const Icon(
+                        Icons.school_rounded,
+                        size: 70,
+                        color: Color(0xFF3D5AFE),
+                      ),
                       const SizedBox(height: 16),
                       const Text(
                         'GrowTogether',
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       const SizedBox(height: 8),
                       const Text(
@@ -117,7 +135,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                           labelText: 'University Email',
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(14)),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(14),
+                          ),
                           prefixIcon: const Icon(Icons.alternate_email),
                         ),
                       ),
@@ -127,11 +147,18 @@ class _LoginScreenState extends State<LoginScreen> {
                         obscureText: _obscureText,
                         decoration: InputDecoration(
                           labelText: 'Password',
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(14)),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(14),
+                          ),
                           prefixIcon: const Icon(Icons.lock_outline),
                           suffixIcon: IconButton(
-                            onPressed: () => setState(() => _obscureText = !_obscureText),
-                            icon: Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
+                            onPressed: () =>
+                                setState(() => _obscureText = !_obscureText),
+                            icon: Icon(
+                              _obscureText
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                            ),
                           ),
                         ),
                       ),
@@ -151,7 +178,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               ? const SizedBox(
                                   width: 22,
                                   height: 22,
-                                  child: CircularProgressIndicator(strokeWidth: 2),
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                  ),
                                 )
                               : const Text('Login'),
                         ),
@@ -160,9 +189,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text('Don\'t have an account?'),
+                          const Text("Don't have an account?"),
                           TextButton(
-                            onPressed: () => Navigator.pushNamed(context, '/signup'),
+                            onPressed: () =>
+                                Navigator.pushNamed(context, '/signup'),
                             child: const Text('Sign Up'),
                           ),
                         ],
